@@ -57,19 +57,61 @@ The broker has three different parts. The exchange, the queues and the bindings.
 
 \subsubsection*{Exchange}
 \addcontentsline{toc}{subsubsection}{Exchange}
-\justify{This component is in charge of receiving the messages that have been sent to the broker by a producer and is the responsible of place them in the proper queue according to a routing key. This means that the producer does not send the messages directly to the queue, but send it to an exchange with a routing key.}
+\justify{This component is in charge of receiving the messages that have been sent to the broker by a producer and is the responsible of place them in the proper queue according to a routing key. This means that the producer does not send the messages directly to the queue, but send it to an exchange with a routing key.\\
+In this way, if a producer wants to send a message to various queues, does not have to send It to each one of them, but the exchange is responsible for distributing this message to each one of the queues. There're three types of exchange: direct, topic and fanout.\\}
+
+\begin{itemize}
+    \item \textit{Direct exchange}: Takes the routing key that comes inside the message and sends it to the queue that's associated with this exchange and with this routing key.\\
+    Example:\\
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale = 0.7]{Images/direct_exchange.jpg}
+        \caption{Message sending to a direct exchange}
+        \label{fig:direct_exchange}
+    \end{figure}
+    Let's imagine the situation in what a postman has to deliver the mail to the concierge of a building and this has to put all the letters in the correspondence mailboxes. The process would be: The mail is delivered to the concierge (direct exchange)(the postman acts as the producer) and the concierge looks for the destination apartment and once the destination is found, the concierge puts the mail in the corresponding mailboxes.
+    \item \textit{Topic exchange}: Carries the message to the queues that complain with a pattern in the routing key. For example, if we've the queue "Q1" associated with the exchange "EXCH1" with the routing key "gunLicense.exam.theoretical" and the queue "Q2" associated with the same exchange with the routing key "gunLicense.exam.practical", a message that's sent to the exchange "EXCH1" with the routing key "gunLicense.exam.*" will be sent to both queues.\\
+    Example:\\
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale = 0.4]{Images/topic_exchange.jpg}
+        \caption{Message sending to a tpoic exchange}
+        \label{fig:topic_exchange}
+    \end{figure}
+    In this case, the situation is going to change kind of. Now, the situation is: The postman will deliver to the concierge two letters (both letters are equal) that go, only, to the neighbours of the last floor (let's imagine that in the last floor are the flats 601 and 602). Hence, the postman (producer in this situation) delivers the letters to the concierge and this puts the letters inside the mailboxes, only checking (in this example) the two first numbers 6 and 0 because the digits that identify the last floor are the two first ones.
+    \item \textit{Fanout exchange}: Sends the message to all the queues associated with the exchange, regardless of routing key.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale = 0.4]{Images/fanout_exchange.jpg}
+        \caption{Message sending to a topic exchange}
+        \label{fig:topic_exchange}
+    \end{figure}
+    \newpage
+    In this final situation, the concierge will receive a letter for the entire neighbourhood. Thus, the concierge will not check neither the floor nor the flat. Instead, will put a copy of the letter in each neighbour's mailbox.
+\end{itemize}
 
 \subsubsection*{Routing key}
 \addcontentsline{toc}{subsubsection}{Routing key}
-\justify{}
+\justify{Is the identifier that uses the exchange to know the route of a message. At the same time is the identifier that uses a queue to know with which exchange has to associate.}
 
 \subsubsection*{Queue}
 \addcontentsline{toc}{subsubsection}{Queue}
-\justify{}
+\justify{A queue is a data structure that imitates real queues as the ones we can see in the mailbox or at the neighbourhood supermarket.
+A message queue is an asynchronous communication way that's used on microservices architectures. The messages are stored in the queue until are received and deleted being every message processed only once.\\
+Hence, the queue is the component that stores messages from the exchange and sends them to the consumers that are listening for these messages.}
 
 \subsubsection*{Binding}
 \addcontentsline{toc}{subsubsection}{Binding}
-\justify{}
+\justify{A binding is a relationship between an exchange and a queue. This can be simply read as: the queue is interested in messages from this exchange.\\
+Bindings can take an extra routing key parameter.\\
+This is how a binding with a key could be created\\}
+\begin{lstlisting}
+    channel.queue_bind(exchange = excahnge_name,
+                        queue = queue_name,
+                        routing_key = 'black')
+\end{lstlisting}
+\justify{The above code, is using the \textit{Pika} Python client.\\}
+\justify{The meaning of a binding key depends on the exchange type. The \textit{fanout} exchanges, just ignore this value.}
 
 \subsubsection*{Virtual host}
 \addcontentsline{toc}{subsubsection}{Virtual host}
@@ -78,22 +120,36 @@ The broker has three different parts. The exchange, the queues and the bindings.
 \subsection*{MQTT}
 \addcontentsline{toc}{subsection}{MQTT}
 \justify{}
-\subsection*{WebSockets}
-\addcontentsline{toc}{subsection}{WebSockets}
-\justify{}
+
 \subsection*{RabbitMQ streams}
 \addcontentsline{toc}{subsection}{RabbitMQ streams}
 \justify{}
+
+\section*{Applications}
+\addcontentsline{toc}{section}{Applications}
+
+\subsection*{WebSockets}
+\addcontentsline{toc}{subsection}{WebSockets}
+\justify{}
+
 \section*{RabbitMQ vs. market}
 \addcontentsline{toc}{section}{RabbitMQ vs. market}
 \justify{}
+
 \newpage
+
 \subsection*{Advantages}
 \addcontentsline{toc}{subsection}{Advantages}
 \justify{}
+
 \subsection*{Disadvantages}
 \addcontentsline{toc}{subsection}{Disadvantages}
 \justify{}
+
+\section*{Conclusions}
+\addcontentsline{toc}{section}{Conclusions}
+\justify{}
+
 \section*{References}
 \addcontentsline{toc}{section}{References}
 \begin{itemize}
@@ -102,5 +158,6 @@ The broker has three different parts. The exchange, the queues and the bindings.
     \item \href{https://www.sdos.es/blog/microservicios-mensajes-spring-rabbitmq}{\underline{\textit{Conectar microservicios con colas de mensajes usando Spring y RabbitMQ}'s webpage}}
     \item \href{https://www.pragma.com.co/academia/lecciones/conozcamos-sobre-rabbitmq-sus-componentes-y-beneficios}{\underline{\textit{Conozcamos sobre RabbitMQ, sus componentes y beneficios}'s webpage}}
     \item \href{https://www.researchgate.net/publication/325119432/figure/fig5/AS:626093459505153@1526283721309/AMQP-architecture-34.png}{\underline{AMQP architecture work picture}}
+    \item \href{https://www.rabbitmq.com/protocols.html}{\underline{Which protocols does RabbitMQ support?}}
 \end{itemize}
 \end{document}
