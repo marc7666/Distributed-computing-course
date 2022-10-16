@@ -115,11 +115,35 @@ This is how a binding with a key could be created\\}
 
 \subsubsection*{Virtual host}
 \addcontentsline{toc}{subsubsection}{Virtual host}
-\justify{}
+\justify{RabbitMQ is multy-tenant system: connections, exchanges, queues, bindings and some other things belong to virtual hosts. If the user is familiar with virtual hosts in Apache, the idea is similar. However, there's an important difference: in Apache, virtual hosts are defined in the configuration file; that's no the case of RabbitMQ; virtual hosts are created and deleted using \textit{rebbitmqctl} or HTTP API instead.\\
+A virtual host, provides logical grouping and separation resources. Separation of physical resources is not a goal of virtual hosts and should be considered an implementation detail.\\
+For example, resource permissions in RabbitMQ are scoped per virtual host. A user does not have global permissions, only permissions in one or more virtual hosts. User tags can be considered global permissions but they are an exception to the rule.\\
+Therefore when talking about user permissions it's very important to clarify what virtual host(s) they apply to.\\
+A virtual host has a name. When an AMQP 0-9-1 client connects to RabbitMQ, it specifies a virtual host name to connect to. If the username is not granted permissions, the connection is refused.}
+
+\paragraph*{Creating and deleting virtual hosts\\}
+\addcontentsline{toc}{paragraph}{Creating and deleting virtual hosts}
+\textit{Using CLI tools:\\}
+\begin{lstlisting}
+    rabbitmqctl add_vhost qua1
+\end{lstlisting}
+
+\begin{lstlisting}
+    rabbitmqctl delete_vhost qua1
+\end{lstlisting}
+
+\textit{Using HTML API\\}
+\begin{lstlisting}
+    curl -u username:pa$sw0rD -X PUT http://rabbitmq.local:15672/api/vhosts/vh1
+\end{lstlisting}
+
+\begin{lstlisting}
+    curl -u username:pa$sw0rD -X DELETE http://rabbitmq.local:15672/api/vhosts/vh1
+\end{lstlisting}
 
 \subsection*{MQTT}
 \addcontentsline{toc}{subsection}{MQTT}
-\justify{}
+\justify{MQTT is a binary protocol emphasising lightweight publish/subscribe messaging, targeted towards clients in constrained devices. It has well defined messaging semantics for publish/subscribe, but not for the other messaging idioms.}
 
 \subsection*{RabbitMQ streams}
 \addcontentsline{toc}{subsection}{RabbitMQ streams}
@@ -159,5 +183,7 @@ This is how a binding with a key could be created\\}
     \item \href{https://www.pragma.com.co/academia/lecciones/conozcamos-sobre-rabbitmq-sus-componentes-y-beneficios}{\underline{\textit{Conozcamos sobre RabbitMQ, sus componentes y beneficios}'s webpage}}
     \item \href{https://www.researchgate.net/publication/325119432/figure/fig5/AS:626093459505153@1526283721309/AMQP-architecture-34.png}{\underline{AMQP architecture work picture}}
     \item \href{https://www.rabbitmq.com/protocols.html}{\underline{Which protocols does RabbitMQ support?}}
+    \item \href{https://www.rabbitmq.com/vhosts.html}{\underline{Creating and deleting virtual hosts}}
+    \item \href{https://www.luisllamas.es/que-es-mqtt-su-importancia-como-protocolo-iot/}{MQTT}
 \end{itemize}
 \end{document}
