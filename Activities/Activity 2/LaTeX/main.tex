@@ -143,7 +143,25 @@ A virtual host has a name. When an AMQP 0-9-1 client connects to RabbitMQ, it sp
 
 \subsection*{MQTT}
 \addcontentsline{toc}{subsection}{MQTT}
-\justify{MQTT is a binary protocol emphasising lightweight publish/subscribe messaging, targeted towards clients in constrained devices. It has well defined messaging semantics for publish/subscribe, but not for the other messaging idioms.}
+\justify{MQTT is M2M communication protocol of type message queue.\\
+It's based on the TCP stack as the communication base. In the MQTT case, every connection keeps opened and is “reused” in every communication. It's a difference, for example, with an HTTP 1.0 petition where every transmission is reused through the connection.\\
+MQTT was created by Dr. Andy Stanford-Clark of IBM and Arlen Nipper de Arcom in 1999 as a mechanism to connect devices used in the petrol industry.\\
+Though initially was a proprietary format, in 2010 was released and in 2014, became a standard according to OASIS (Organization for the Advancement of Structured Information Standards).\\
+The MQTT work is a push messaging service with the pub-sub pattern. In this type of infrastructures, the clients they connect with a central server named broker.\\
+To filter the messages that are sent to each client, the messages are arranged in topics hierarchically organized. A client can publish a message in a specific topic. Other clients can subscribe to this topic and the broker will send the subscribed messages.}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.7]{Images/mqtt.jpg}
+    \caption{MQTT}
+    \label{fig:mqtt}
+\end{figure}
+
+\justify{The clients start a TCP/IP connection with the broker, which maintain a registration of the connected clients. This connection keeps opened until the client ends it. By default, MQTT uses the ports 1883 and 8883 when works on TLS.\\
+To do that, the client sends a CONNECT message that contains the necessary information. The broker answers with a CONNACK message, that contains the result of the connection.\\
+To send the messages, the client uses PUBLISH messages, that contain the topic and the payload.\\
+To subscribe and unsubscribe, the SUBSCRIBE and UNSUBSCRIBE messages are used. The server responds with a SUBACK or with a UNSUBACK.\\
+To make sure that the connection is active, the clients send periodically a PINGREQ message which is answered, by the server, with a PINGRESP, Finally, the client disconnects sending a DISCONNECT message.}
 
 \subsection*{RabbitMQ streams}
 \addcontentsline{toc}{subsection}{RabbitMQ streams}
@@ -184,6 +202,6 @@ A virtual host has a name. When an AMQP 0-9-1 client connects to RabbitMQ, it sp
     \item \href{https://www.researchgate.net/publication/325119432/figure/fig5/AS:626093459505153@1526283721309/AMQP-architecture-34.png}{\underline{AMQP architecture work picture}}
     \item \href{https://www.rabbitmq.com/protocols.html}{\underline{Which protocols does RabbitMQ support?}}
     \item \href{https://www.rabbitmq.com/vhosts.html}{\underline{Creating and deleting virtual hosts}}
-    \item \href{https://www.luisllamas.es/que-es-mqtt-su-importancia-como-protocolo-iot/}{MQTT}
+    \item \href{https://www.luisllamas.es/que-es-mqtt-su-importancia-como-protocolo-iot/}{\underline{MQTT}}
 \end{itemize}
 \end{document}
