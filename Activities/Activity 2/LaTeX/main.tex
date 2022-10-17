@@ -1,5 +1,5 @@
-\documentclass[4paper,12pt]{article}
-\usepackage[English]{varioref}
+\documentclass[12pt]{article}
+\usepackage[english]{varioref}
 \usepackage{setspace}
 \input{Sections/packages}
 \input{Sections/FrontPage}
@@ -20,7 +20,7 @@
 \newpage
 \section*{Introduction}
 \addcontentsline{toc}{section}{Introduction}
-\justify{The main aim of this report is going to be to discover RabbitMQ software.\\
+The main aim of this report is going to be to discover RabbitMQ software.\\
 As everybody knows, there're three main essential attributes when designing and developing software that helps companies to offer trustworthy digital services and products. These three main attributes are: scalability, resiliency and interoperability.\\
 In the actual market, there is a big amount of technologies that achieve that target. Among these technologies, we can find RabbitMQ.\\
 RabbitMQ is an open-source message broker, sometimes called message-oreinted middleware.\\
@@ -28,22 +28,22 @@ This software implements the "Advanced message queuing protocol". The RabbitMQ s
 RabbitMQ is a cross-platform software and the source code is released under the Mozilla public license.\\
 In a simplified way, RabbitMQ defines queues that will store the messages sent by producers until the consumer apps get the message and process it.\\
 So, It can be said that RabbitMQ, in his broker role, has the work of routing to the correct consumer the messages that the producer sends.
-To download and starting to use the software, just enter in the \href{https://www.rabbitmq.com}{\underline{RabbitMQ}} webpage.}
+To download and starting to use the software, just enter in the \href{https://www.rabbitmq.com}{\underline{RabbitMQ}} webpage.
 \pagenumbering{arabic}
 
 \section*{Architecture}
 \addcontentsline{toc}{section}{Architecture}
-\justify{Originally, RabbitMQ implemented the "Advanced message queuing protocol" (AMQP) but has been extended with a plug-in architecture to support "Streaming text oriented messaging protocol" (STOMP), "MQ telemetry transport" (MQTT), "HTTP and WebSockets" and "RabbitMQ streams".\\
-HTTP is not really a messaging protocol but RabbitMQ can transmit messages over HTTP in three ways. The first one is the web STOMP plugin that supports STOMP messaging to the browser using WebSockets. The second one, is the web MQTT plugin that supports MQTT messaging to the browser using WebSockets. The tird, and the final, way is the management plugin that supports a simple HTTP API to send and receive messages. This is primarily intended for diagnostic purposes but can be used for low volume messaging without reliable delivery.}
+Originally, RabbitMQ implemented the "Advanced message queuing protocol" (AMQP) but has been extended with a plug-in architecture to support "Streaming text oriented messaging protocol" (STOMP), "MQ telemetry transport" (MQTT), "HTTP and WebSockets" and "RabbitMQ streams".\\
+HTTP is not really a messaging protocol but RabbitMQ can transmit messages over HTTP in three ways. The first one is the web STOMP plugin that supports STOMP messaging to the browser using WebSockets. The second one, is the web MQTT plugin that supports MQTT messaging to the browser using WebSockets. The tird, and the final, way is the management plugin that supports a simple HTTP API to send and receive messages. This is primarily intended for diagnostic purposes but can be used for low volume messaging without reliable delivery.
 \newpage
 \subsection*{AMQP}
 \addcontentsline{toc}{subsection}{AMQP}
-\justify{As AMQP is the "core" protocol supported by the broker, this section will be the most extensive.\\
+As AMQP is the "core" protocol supported by the broker, this section will be the most extensive.\\
 RabbitMQ, originally only supported AMQP 0-9-1. All of the variants are fairly similar to each other, with later versions tidying up the unclear or unhelpful parts of earlier versions.\\
 AMQP 0-9-1 is a binary protocol, and defines quite strong messaging semantics. For client it's a reasonably easy protocol to implement, and as such there are a large number of client libraries available for many different programming languages and environments.\\
 AMQP is an advanced queue messaging protocol that stands out for his fidelity. There're commercial and open-source servers and interoperable clients for many programming languages, which facilitates  their use. It's used by big corporations that process millions of messages.\\
 The deffinition of AMQP can be simplified in three words: "message-oriented middleware". Behinf this simple definition there're a lot of features available. Before AMQP there were some message-oriented middlewares such, for example, JMS, but AMQP has become the standard protocol to keep when a queue-based solution is chosen.\\
-AMQP is pretty simple to understand, there're client applications called producers that create messages and deliver it to an AMQP server, also called, broker. Inside the broker the messages are routed and filtered until arrive to queues where another applications called consumers are connected and get the messages to be processed.}
+AMQP is pretty simple to understand, there're client applications called producers that create messages and deliver it to an AMQP server, also called, broker. Inside the broker the messages are routed and filtered until arrive to queues where another applications called consumers are connected and get the messages to be processed.
 
 \begin{figure}[H]
     \centering
@@ -52,13 +52,13 @@ AMQP is pretty simple to understand, there're client applications called produce
     \label{fig:AMQP_architecture}
 \end{figure}
 
-\justify{Once seen this, it's time to deep inside the broker, where the magic of AMQP is done.\\
-The broker has three different parts. The exchange, the queues and the bindings.}
+Once seen this, it's time to deep inside the broker, where the magic of AMQP is done.\\
+The broker has three different parts. The exchange, the queues and the bindings.
 
 \subsubsection*{Exchange}
 \addcontentsline{toc}{subsubsection}{Exchange}
-\justify{This component is in charge of receiving the messages that have been sent to the broker by a producer and is the responsible of place them in the proper queue according to a routing key. This means that the producer does not send the messages directly to the queue, but send it to an exchange with a routing key.\\
-In this way, if a producer wants to send a message to various queues, does not have to send It to each one of them, but the exchange is responsible for distributing this message to each one of the queues. There're three types of exchange: direct, topic and fanout.\\}
+This component is in charge of receiving the messages that have been sent to the broker by a producer and is the responsible of place them in the proper queue according to a routing key. This means that the producer does not send the messages directly to the queue, but send it to an exchange with a routing key.\\
+In this way, if a producer wants to send a message to various queues, does not have to send It to each one of them, but the exchange is responsible for distributing this message to each one of the queues. There're three types of exchange: direct, topic and fanout.\\
 
 \begin{itemize}
     \item \textit{Direct exchange}: Takes the routing key that comes inside the message and sends it to the queue that's associated with this exchange and with this routing key.\\
@@ -84,7 +84,7 @@ In this way, if a producer wants to send a message to various queues, does not h
         \centering
         \includegraphics[scale = 0.4]{Images/fanout_exchange.jpg}
         \caption{Message sending to a topic exchange}
-        \label{fig:topic_exchange}
+        \label{fig:fanout_exchange}
     \end{figure}
     \newpage
     In this final situation, the concierge will receive a letter for the entire neighbourhood. Thus, the concierge will not check neither the floor nor the flat. Instead, will put a copy of the letter in each neighbour's mailbox.
@@ -92,37 +92,36 @@ In this way, if a producer wants to send a message to various queues, does not h
 
 \subsubsection*{Routing key}
 \addcontentsline{toc}{subsubsection}{Routing key}
-\justify{Is the identifier that uses the exchange to know the route of a message. At the same time is the identifier that uses a queue to know with which exchange has to associate.}
+Is the identifier that uses the exchange to know the route of a message. At the same time is the identifier that uses a queue to know with which exchange has to associate.
 
 \subsubsection*{Queue}
 \addcontentsline{toc}{subsubsection}{Queue}
-\justify{A queue is a data structure that imitates real queues as the ones we can see in the mailbox or at the neighbourhood supermarket.
+A queue is a data structure that imitates real queues as the ones we can see in the mailbox or at the neighbourhood supermarket.
 A message queue is an asynchronous communication way that's used on microservices architectures. The messages are stored in the queue until are received and deleted being every message processed only once.\\
-Hence, the queue is the component that stores messages from the exchange and sends them to the consumers that are listening for these messages.}
+Hence, the queue is the component that stores messages from the exchange and sends them to the consumers that are listening for these messages.
 
 \subsubsection*{Binding}
 \addcontentsline{toc}{subsubsection}{Binding}
-\justify{A binding is a relationship between an exchange and a queue. This can be simply read as: the queue is interested in messages from this exchange.\\
+A binding is a relationship between an exchange and a queue. This can be simply read as: the queue is interested in messages from this exchange.\\
 Bindings can take an extra routing key parameter.\\
-This is how a binding with a key could be created\\}
+This is how a binding with a key could be created\\
 \begin{lstlisting}
     channel.queue_bind(exchange = excahnge_name,
                         queue = queue_name,
                         routing_key = 'black')
 \end{lstlisting}
-\justify{The above code, is using the \textit{Pika} Python client.\\}
-\justify{The meaning of a binding key depends on the exchange type. The \textit{fanout} exchanges, just ignore this value.}
+The above code, is using the \textit{Pika} Python client.\\
+The meaning of a binding key depends on the exchange type. The \textit{fanout} exchanges, just ignore this value.
 
 \subsubsection*{Virtual host}
 \addcontentsline{toc}{subsubsection}{Virtual host}
-\justify{RabbitMQ is multy-tenant system: connections, exchanges, queues, bindings and some other things belong to virtual hosts. If the user is familiar with virtual hosts in Apache, the idea is similar. However, there's an important difference: in Apache, virtual hosts are defined in the configuration file; that's no the case of RabbitMQ; virtual hosts are created and deleted using \textit{rebbitmqctl} or HTTP API instead.\\
+RabbitMQ is multy-tenant system: connections, exchanges, queues, bindings and some other things belong to virtual hosts. If the user is familiar with virtual hosts in Apache, the idea is similar. However, there's an important difference: in Apache, virtual hosts are defined in the configuration file; that's no the case of RabbitMQ; virtual hosts are created and deleted using \textit{rebbitmqctl} or HTTP API instead.\\
 A virtual host, provides logical grouping and separation resources. Separation of physical resources is not a goal of virtual hosts and should be considered an implementation detail.\\
 For example, resource permissions in RabbitMQ are scoped per virtual host. A user does not have global permissions, only permissions in one or more virtual hosts. User tags can be considered global permissions but they are an exception to the rule.\\
 Therefore when talking about user permissions it's very important to clarify what virtual host(s) they apply to.\\
-A virtual host has a name. When an AMQP 0-9-1 client connects to RabbitMQ, it specifies a virtual host name to connect to. If the username is not granted permissions, the connection is refused.}
+A virtual host has a name. When an AMQP 0-9-1 client connects to RabbitMQ, it specifies a virtual host name to connect to. If the username is not granted permissions, the connection is refused.
 
 \paragraph*{Creating and deleting virtual hosts\\}
-\addcontentsline{toc}{paragraph}{Creating and deleting virtual hosts}
 \textit{Using CLI tools:\\}
 \begin{lstlisting}
     rabbitmqctl add_vhost qua1
@@ -141,14 +140,18 @@ A virtual host has a name. When an AMQP 0-9-1 client connects to RabbitMQ, it sp
     curl -u username:pa$sw0rD -X DELETE http://rabbitmq.local:15672/api/vhosts/vh1
 \end{lstlisting}
 
+\section*{Applications}
+\addcontentsline{toc}{section}{Applications}
+In this section of the report, some messaging protocols will be seen, but they have been placed here because, in the RabbitMQ context, all of them are plugins. This means that, RabbitMQ can work properly without this set of protocols and if It can work means that these protocols are not mandatory, nevertheless, AMQP is completely mandatory for RabbitMQ.
+If we have to distinguish, easily, between architecture and applications, we could say that architecture are those protocols that are completely necessary for running the software and applications are other things that the software can run properly without. This is the reason because in this section protocols like MQTT and STOMP will be seen.
 \subsection*{MQTT}
 \addcontentsline{toc}{subsection}{MQTT}
-\justify{MQTT is M2M communication protocol of type message queue.\\
+MQTT is M2M communication protocol of type message queue.\\
 It's based on the TCP stack as the communication base. In the MQTT case, every connection keeps opened and is “reused” in every communication. It's a difference, for example, with an HTTP 1.0 petition where every transmission is reused through the connection.\\
 MQTT was created by Dr. Andy Stanford-Clark of IBM and Arlen Nipper de Arcom in 1999 as a mechanism to connect devices used in the petrol industry.\\
 Though initially was a proprietary format, in 2010 was released and in 2014, became a standard according to OASIS (Organization for the Advancement of Structured Information Standards).\\
 The MQTT work is a push messaging service with the pub-sub pattern. In this type of infrastructures, the clients they connect with a central server named broker.\\
-To filter the messages that are sent to each client, the messages are arranged in topics hierarchically organized. A client can publish a message in a specific topic. Other clients can subscribe to this topic and the broker will send the subscribed messages.}
+To filter the messages that are sent to each client, the messages are arranged in topics hierarchically organized. A client can publish a message in a specific topic. Other clients can subscribe to this topic and the broker will send the subscribed messages.
 
 \begin{figure}[H]
     \centering
@@ -157,40 +160,74 @@ To filter the messages that are sent to each client, the messages are arranged i
     \label{fig:mqtt}
 \end{figure}
 
-\justify{The clients start a TCP/IP connection with the broker, which maintain a registration of the connected clients. This connection keeps opened until the client ends it. By default, MQTT uses the ports 1883 and 8883 when works on TLS.\\
+The clients start a TCP/IP connection with the broker, which maintain a registration of the connected clients. This connection keeps opened until the client ends it. By default, MQTT uses the ports 1883 and 8883 when works on TLS.\\
 To do that, the client sends a CONNECT message that contains the necessary information. The broker answers with a CONNACK message, that contains the result of the connection.\\
 To send the messages, the client uses PUBLISH messages, that contain the topic and the payload.\\
 To subscribe and unsubscribe, the SUBSCRIBE and UNSUBSCRIBE messages are used. The server responds with a SUBACK or with a UNSUBACK.\\
-To make sure that the connection is active, the clients send periodically a PINGREQ message which is answered, by the server, with a PINGRESP, Finally, the client disconnects sending a DISCONNECT message.}
+To make sure that the connection is active, the clients send periodically a PINGREQ message which is answered, by the server, with a PINGRESP, Finally, the client disconnects sending a DISCONNECT message.\\
+To anable the MQTT plugin:
+\begin{lstlisting}
+    rabbitmq-plugins enable rabbitmq_mqtt
+\end{lstlisting}
 
-\subsection*{RabbitMQ streams}
-\addcontentsline{toc}{subsection}{RabbitMQ streams}
-\justify{}
-
-\section*{Applications}
-\addcontentsline{toc}{section}{Applications}
+\subsection*{STOMP}
+\addcontentsline{toc}{subsection}{STOMP}
+STOMP is the Simple Text Oriented Messaging Protocol.\\
+STOMP provides an interoperable wire format so that STOMP clients can communicate with any STOMP message broker to provide easy and widespread messaging interoperability among many languages, platforms and brokers\\
+STOMP is a very simple and easy to implement protocol, coming from the HTTP school of design; the server side may be hard to implement well, but it is very easy to write a client to get yourself connected.\\
+Many developers have told that they have managed to write a STOMP client in a couple of hours to in their particular language, runtime or platform into the STOMP network.\\
+To anable the STOMP plugin:
+\begin{lstlisting}
+    rabbitmq-plugins enable rabbitmq_stomp
+\end{lstlisting}
 
 \subsection*{WebSockets}
 \addcontentsline{toc}{subsection}{WebSockets}
-\justify{}
+As it has been said before, RabbitMQ can transmit messages over HTTP in three ways, and tow of these are using WebSockets. These two ways are plugins; the first one supports STOMP messaging and the second supports MQTT.\\
+To anable the STOMP WebSocket plugin:
+\begin{lstlisting}
+    rabbitmq-plugins enable rabbitmq_web_stomp
+\end{lstlisting}
+To enable the MQTT WebSocket plugin:
+\begin{lstlisting}
+    rabbitmq-plugins enable rabbitmq_web_mqtt
+\end{lstlisting}
 
-\section*{RabbitMQ vs. market}
-\addcontentsline{toc}{section}{RabbitMQ vs. market}
-\justify{}
+\subsection*{RabbitMQ streams}
+\addcontentsline{toc}{subsection}{RabbitMQ streams}
+The RabbitMQ streams protocol allows communicating with streams.\\
+The RabbitMQ stream is a Java library to communicate with the RabbitMQ Stream plugin. It allows to create and delete streams, as well as to publish to and consume from these streams. The rptocol is still under development and is subject to change.\\
+To enable the RabbitMQ streams plugin:
+\begin{lstlisting}
+    rabbitmq-plugins enable rabbitmq_stream
+\end{lstlisting}
 
-\newpage
+\subsubsection*{Streams}
+\addcontentsline{toc}{subsubsection}{Streams}
+A stream is a sequence of elements from a source that supports data processing operations.\\
+Sequence of elements: while collections are about data, streams are about computations.\\
+Source: Streams consume data from a providing source.\\
+Data processing operations:
+
+\begin{itemize}
+    \item Database-like and functional programming.
+    \item Pipelining and internal iteration
+\end{itemize}
+
+\section*{RabbitMQ in the  market}
+\addcontentsline{toc}{section}{RabbitMQ in the market}
 
 \subsection*{Advantages}
 \addcontentsline{toc}{subsection}{Advantages}
-\justify{}
 
 \subsection*{Disadvantages}
 \addcontentsline{toc}{subsection}{Disadvantages}
-\justify{}
 
-\section*{Conclusions}
+\subsection*{Competition on the market}
+\addcontentsline{toc}{section}{Competition on the market}
+
+\subsection*{Conclusions}
 \addcontentsline{toc}{section}{Conclusions}
-\justify{}
 
 \section*{References}
 \addcontentsline{toc}{section}{References}
@@ -203,5 +240,8 @@ To make sure that the connection is active, the clients send periodically a PING
     \item \href{https://www.rabbitmq.com/protocols.html}{\underline{Which protocols does RabbitMQ support?}}
     \item \href{https://www.rabbitmq.com/vhosts.html}{\underline{Creating and deleting virtual hosts}}
     \item \href{https://www.luisllamas.es/que-es-mqtt-su-importancia-como-protocolo-iot/}{\underline{MQTT}}
-\end{itemize}
+    \item \href{https://en.wikipedia.org/wiki/WebSocket}{\underline{WebSocket wikipedia's page}}
+    \item \href{http://stomp.github.io}{\underline{STOMP}}
+    \item \href{https://programmerclick.com/article/80671335987/}{\underline{Advantages and disavantages of RabbitMQ}}
+    \end{itemize}
 \end{document}
