@@ -216,17 +216,25 @@ Data processing operations:
 
 \section*{RabbitMQ in the  market}
 \addcontentsline{toc}{section}{RabbitMQ in the market}
+This report's section is going to contain three parts. In the first one, will be shown the advantages of using RabbitMQ. In the second one, on the contrary, will be shown the disadvantages of this technology and in the final section is going to be mentioned the most important competition in the market.
 
 \subsection*{Advantages}
 \addcontentsline{toc}{subsection}{Advantages}
+\begin{enumerate}
+    \item Allows the integration of different applications through messages in an asynchronous way (decoupling in time) and from various locations (decoupling in space)
+    \item Reliability: RabbitMQ incorporates several characteristics that allow it to guarantee the delivery of the messages. Among them, provides storing when there's no available consumers to receive the message, offers the possibility that the consumer accepts the delivery of the message to make sure that it has been processed successful and, in case the prosecution has failed, allows the message can be re-queued for being consumed by a different instance of the consumer or be processed again by the same consumer (the one that initially failed), when this recovers.\\
+    RabbitMQ, guarantees the order of delivery, it's to say, the messages are consumed in the same order in which they have arrived at the queues.
+    \item Cluster creation: while RabbitMQ provides high-performance processing thousands of messages per second, sometimes has to be able to process more messages without impacting on the application's performance. For this, RabbitMQ allows the creation of clusters to scale horizontally the solution. This is transparent for the producers and for the consumers.
+    \item Available: In RabbitMQ, the queues can be replicated in several nodes of the cluster, providing the security that in case of failure of a node the broker can keep receiving messages of the producers and keep delivering them to the proper consumers.
+\end{enumerate}
 
 \subsection*{Disadvantages}
 \addcontentsline{toc}{subsection}{Disadvantages}
 
 \subsection*{Competition on the market}
-\addcontentsline{toc}{section}{Competition on the market}
+\addcontentsline{toc}{subsection}{Competition on the market}
 
-\subsection*{Conclusions}
+\section*{Conclusions}
 \addcontentsline{toc}{section}{Conclusions}
 
 \section*{References}
@@ -243,5 +251,6 @@ Data processing operations:
     \item \href{https://en.wikipedia.org/wiki/WebSocket}{\underline{WebSocket wikipedia's page}}
     \item \href{http://stomp.github.io}{\underline{STOMP}}
     \item \href{https://programmerclick.com/article/80671335987/}{\underline{Advantages and disavantages of RabbitMQ}}
+\item \href{https://blog.devgenius.io/scalable-system-implementation-using-rabbitmq-java-and-mysql-2d5fe0fa182e}{\underline{RabbitMQ properties}}
     \end{itemize}
 \end{document}
