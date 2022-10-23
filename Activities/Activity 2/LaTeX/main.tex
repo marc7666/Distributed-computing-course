@@ -42,7 +42,7 @@ As AMQP is the "core" protocol supported by the broker, this section will be the
 RabbitMQ, originally only supported AMQP 0-9-1. All of the variants are fairly similar to each other, with later versions tidying up the unclear or unhelpful parts of earlier versions.\\
 AMQP 0-9-1 is a binary protocol, and defines quite strong messaging semantics. For client it's a reasonably easy protocol to implement, and as such there are a large number of client libraries available for many different programming languages and environments.\\
 AMQP is an advanced queue messaging protocol that stands out for his fidelity. There're commercial and open-source servers and interoperable clients for many programming languages, which facilitates  their use. It's used by big corporations that process millions of messages.\\
-The deffinition of AMQP can be simplified in three words: "message-oriented middleware". Behinf this simple definition there're a lot of features available. Before AMQP there were some message-oriented middlewares such, for example, JMS, but AMQP has become the standard protocol to keep when a queue-based solution is chosen.\\
+The deffinition of AMQP can be simplified in three words: "message-oriented middleware". Behind this simple definition there're a lot of features available. Before AMQP there were some message-oriented middlewares such, for example, JMS, but AMQP has become the standard protocol to keep when a queue-based solution is chosen.\\
 AMQP is pretty simple to understand, there're client applications called producers that create messages and deliver it to an AMQP server, also called, broker. Inside the broker the messages are routed and filtered until arrive to queues where another applications called consumers are connected and get the messages to be processed.
 
 \begin{figure}[H]
@@ -75,7 +75,7 @@ In this way, if a producer wants to send a message to various queues, does not h
     \begin{figure}[H]
         \centering
         \includegraphics[scale = 0.4]{Images/topic_exchange.jpg}
-        \caption{Message sending to a tpoic exchange}
+        \caption{Message sending to a topic exchange}
         \label{fig:topic_exchange}
     \end{figure}
     In this case, the situation is going to change kind of. Now, the situation is: The postman will deliver to the concierge two letters (both letters are equal) that go, only, to the neighbours of the last floor (let's imagine that in the last floor are the flats 601 and 602). Hence, the postman (producer in this situation) delivers the letters to the concierge and this puts the letters inside the mailboxes, only checking (in this example) the two first numbers 6 and 0 because the digits that identify the last floor are the two first ones.
@@ -184,7 +184,7 @@ To anable the STOMP plugin:
 \subsection*{WebSockets}
 \addcontentsline{toc}{subsection}{WebSockets}
 As it has been said before, RabbitMQ can transmit messages over HTTP in three ways, and tow of these are using WebSockets. These two ways are plugins; the first one supports STOMP messaging and the second supports MQTT.\\
-To anable the STOMP WebSocket plugin:
+To enable the STOMP WebSocket plugin:
 \begin{lstlisting}
     rabbitmq-plugins enable rabbitmq_web_stomp
 \end{lstlisting}
@@ -196,7 +196,7 @@ To enable the MQTT WebSocket plugin:
 \subsection*{RabbitMQ streams}
 \addcontentsline{toc}{subsection}{RabbitMQ streams}
 The RabbitMQ streams protocol allows communicating with streams.\\
-The RabbitMQ stream is a Java library to communicate with the RabbitMQ Stream plugin. It allows to create and delete streams, as well as to publish to and consume from these streams. The rptocol is still under development and is subject to change.\\
+The RabbitMQ stream is a Java library to communicate with the RabbitMQ Stream plugin. It allows creating and delete streams, as well as to publish to and consume from these streams. The protocol is still under development and is subject to change.\\
 To enable the RabbitMQ streams plugin:
 \begin{lstlisting}
     rabbitmq-plugins enable rabbitmq_stream
@@ -221,21 +221,98 @@ This report's section is going to contain three parts. In the first one, will be
 \subsection*{Advantages}
 \addcontentsline{toc}{subsection}{Advantages}
 \begin{enumerate}
-    \item Allows the integration of different applications through messages in an asynchronous way (decoupling in time) and from various locations (decoupling in space)
+    \item Allows the integration of different applications through messages in an asynchronous way (decoupling in time) and from various locations (decoupling in space).
     \item Reliability: RabbitMQ incorporates several characteristics that allow it to guarantee the delivery of the messages. Among them, provides storing when there's no available consumers to receive the message, offers the possibility that the consumer accepts the delivery of the message to make sure that it has been processed successful and, in case the prosecution has failed, allows the message can be re-queued for being consumed by a different instance of the consumer or be processed again by the same consumer (the one that initially failed), when this recovers.\\
     RabbitMQ, guarantees the order of delivery, it's to say, the messages are consumed in the same order in which they have arrived at the queues.
     \item Cluster creation: while RabbitMQ provides high-performance processing thousands of messages per second, sometimes has to be able to process more messages without impacting on the application's performance. For this, RabbitMQ allows the creation of clusters to scale horizontally the solution. This is transparent for the producers and for the consumers.
-    \item Available: In RabbitMQ, the queues can be replicated in several nodes of the cluster, providing the security that in case of failure of a node the broker can keep receiving messages of the producers and keep delivering them to the proper consumers.
+     \item Available: In RabbitMQ, the queues can be replicated in several nodes of the cluster, providing the security that in case of failure of a node the broker can keep receiving messages of the producers and keep delivering them to the proper consumers.
+    \item Security: RabbitMQ has inbuilt to support the Transport Layer Security (TLS) protocol. TLS is a cryptographic protocol that provides secure connections through a network, commonly the Internet. TLS uses X.509 certificates and therefore asymmetric cryptography to authenticate the counterpart who are they communicating and to exchange a symmetric key. Hence, it can be said that RabbitMQ has a good security level.
+    \item Affordability: As RabbitMQ is an open-source software, the affordability is complete. In other words, RabbitMQ is totally free, therefore is completely affordable for those persons that have enough resources to buy a computer and contract an internet plan.
+    \item Failure tolerance: As it can be seen in the following image, RabbitMQ has a simple but fruitful failure handler system:
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale = 2]{Images/fault handling process.jpg}
+        \caption{RabbitMQ's failure handler system}
+        \label{fig:failure}
+    \end{figure}
+    \item Complexity: RabbitMQ is user-friendly and it's easy to modify the configurations to suit the expected porpouse. RabbitMQ is written in Erlang and it's the world's most deployed open-source message broker, meaning that it's a well-tested and robust message broker.
+    \item Latency: Has the lowest latency of the market.
+    \item Performance: Has one of the best yields of the market.
 \end{enumerate}
 
 \subsection*{Disadvantages}
 \addcontentsline{toc}{subsection}{Disadvantages}
+\begin{enumerate}
+    \item Latency: The consumers will balloon in memory as they buffer all the messages in their own RAM. A big buffer, results in a lot of extra latency if the network performs normally, and huge amounts of extra latency if the client suddenly starts taking longer to process each message than normal.
+    \item Resource sharing: Firstly, It has to be said that for allowing resource sharing in RabbitMQ, the management plugin has to be enabled. Secondly, if the plugin is enabled, by default the management UI application will refuse to access to websites hosted on origins different from its own using the CORS mechanism. It is possible to allow any origin to use the API using a wildcard. This is highly discouraged for deployments where the UI application may be exposed to the public.\\
+    The wildcard is:\\
+    \begin{lstlisting}
+        management.cors.allow_origins.1 = *
+    \end{lstlisting}
+    The counsel is to allow the origins different by its own one by one, as it can be seen in the bottom code fragment:
+    \begin{lstlisting}
+        management.cors.allow_origins.1 = https://www.origin1.org
+        management.cors.allow_origins.2 = https://www.origin2.org
+    \end{lstlisting}
+    \item High resource usage: As it has been seen, AMQP is RabbitMQ's core protocol and AMQP has a big disadvantage: the resource consumption. The AMQP clients need a certain processing capacity. It's not intended for its implementation in devices with few computational resources. Furthermore, because of the big quantity of control traffic that is introduced to offer reliability, it's not meant for its implementation in networks with low bandwidth.
+    \item RabbitMQ is developed in Erlang, which makes difficult to understand.
+\end{enumerate}
 
 \subsection*{Competition on the market}
 \addcontentsline{toc}{subsection}{Competition on the market}
+This section will contain a few examples of RabbitMQ's market competition.
+\begin{itemize}
+    \item Memphis
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale = 0.5]{Images/memphis.jpeg}
+        \caption{Memphis' logo}
+        \label{fig:memphis}
+    \end{figure}
+    \newpage
+    \item Apache Kafka
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale = 0.4]{Images/kafka.jpg}
+        \caption{Apache kafka's logo}
+        \label{fig:kafka}
+    \end{figure}
+    \item Apache ActiveMQ
+    \begin{figure}[H]
+        \centering
+        \includegraphics{Images/active.jpg}
+        \caption{Apache ActiveMQ's logo}
+        \label{fig:activemq}
+    \end{figure}
+    \item WSO2
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale = 0.7]{Images/WSO2.png}
+        \caption{WSO2's logo}
+        \label{fig:wso2}
+    \end{figure}
+    \newpage
+    \item ZeroMQ
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale = 0.7]{Images/zeromq-logo.jpg}
+        \caption{ZeroMQ's logo}
+        \label{fig:zeromq}
+    \end{figure}
+\end{itemize}
 
 \section*{Conclusions}
 \addcontentsline{toc}{section}{Conclusions}
+\begin{enumerate}
+    \item RabbitMQ has a core architecture, but can support others through plugins.
+    \item RabbitMQ is uncomplicated to use, reliable, scalable, available, secure, affordable, fault-tolerant, and efficient.
+    \item As AMQP supports many programming languages to be implemented, there are many libraries available to implement the protocol in many ways.
+    \item The exchange is a key element for the messages to arrive at the correct destination.
+    \item Every message has an 'id' that makes it unique.
+    \item So many similarities can be found between Apache virtual hosts' and RabbitMQ virtual hosts'.
+    \item RabbitMQ is not perfect, but the advantages of using it outweighs the disadvantages.
+    \item RabbitMQ has a lot of market competition, but is the most chosen by the companies.
+\end{enumerate}
 
 \section*{References}
 \addcontentsline{toc}{section}{References}
@@ -251,6 +328,10 @@ This report's section is going to contain three parts. In the first one, will be
     \item \href{https://en.wikipedia.org/wiki/WebSocket}{\underline{WebSocket wikipedia's page}}
     \item \href{http://stomp.github.io}{\underline{STOMP}}
     \item \href{https://programmerclick.com/article/80671335987/}{\underline{Advantages and disavantages of RabbitMQ}}
-\item \href{https://blog.devgenius.io/scalable-system-implementation-using-rabbitmq-java-and-mysql-2d5fe0fa182e}{\underline{RabbitMQ properties}}
+    \item \href{https://blog.devgenius.io/scalable-system-implementation-using-rabbitmq-java-and-mysql-2d5fe0fa182e}{\underline{RabbitMQ properties}}
+    \item \href{https://blog.rabbitmq.com/posts/2012/05/some-queuing-theory-throughput-latency-and-bandwidth/}{\underline{Some queuing theory: throughput, latency and bandwidth}}
+    \item \href{https://medium.com/codait/handling-failure-successfully-in-rabbitmq-22ffa982b60f}{\underline{Handling failure successfully in RabbitMQ}}
+    \item \href{https://www.rabbitmq.com/management.html}{\underline{RabbitMQ's management plugin}}
+    \item \href{https://geekflare.com/es/top-message-brokers/}{\underline{RabbitMQ's market competition}}
     \end{itemize}
 \end{document}
