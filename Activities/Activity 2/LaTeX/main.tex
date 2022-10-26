@@ -165,6 +165,12 @@ To do that, the client sends a CONNECT message that contains the necessary infor
 To send the messages, the client uses PUBLISH messages, that contain the topic and the payload.\\
 To subscribe and unsubscribe, the SUBSCRIBE and UNSUBSCRIBE messages are used. The server responds with a SUBACK or with a UNSUBACK.\\
 To make sure that the connection is active, the clients send periodically a PINGREQ message which is answered, by the server, with a PINGRESP, Finally, the client disconnects sending a DISCONNECT message.\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.6]{Images/DSS RabbitMQ.jpg}
+    \caption{Working example of MQTT}
+    \label{fig:mqtt_example}
+\end{figure}
 To anable the MQTT plugin:
 \begin{lstlisting}
     rabbitmq-plugins enable rabbitmq_mqtt
