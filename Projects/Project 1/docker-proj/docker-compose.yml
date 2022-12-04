@@ -1,0 +1,127 @@
+version: "3.8"
+services:
+    clients:
+        build: ./client
+        deploy:
+            mode: replicated
+            replicas: 3
+        networks:
+            asgard:
+    cloud:
+        build: ./cloud
+        container_name: cloud
+        depends_on:
+            database:
+                condition: service_started
+            kafka:
+                condition: service_healthy
+        ports:
+            - 5000:5000
+        environment:
+            DB_URL: mongodb://database/tempreatures
+        networks:
+            asgard:
+                ipv4_address: 192.168.10.101
+    database:
+        image: mongo:latest
+        restart: always
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: marc
+            MONGO_INITDB_ROOT_PASSWORD: 2022
+        container_name: mongodatabase
+        ports:
+            - 27017:27017
+        volumes:
+            - prac:/data/db
+        networks:
+            asgard:
+                ipv4_address: 192.168.10.102
+    mongo-express:
+        image: mongo-express:latest
+        container_name: mongo-express
+        depends_on:
+            - database
+        restart: always
+        ports:
+            - 8081:8081
+        environment:
+            ME_CONFIG_MONGODB_ADMINUSERNAME: marc
+            ME_CONFIG_MONGODB_ADMINPASSWORD: 2022
+            ME_CONFIG_MONGODB_URL: mongodb://marc:2022@192.168.10.102:27017/
+        networks:
+            asgard:
+    zookeeper:
+        image: docker.io/bitnami/zookeeper:3.8
+        ports:
+            - "2181:2181"
+        volumes:
+            - "zookeeper_data:/bitnami"
+        environment:
+            - ALLOW_ANONYMOUS_LOGIN=yes
+        networks:
+            asgard:
+        depends_on:
+            - database
+    kafka:
+        image: docker.io/bitnami/kafka:3.3
+        ports:
+            - "9092:9092"
+        volumes:
+            - "kafka_data:/bitnami"
+        environment:
+            - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+            - ALLOW_PLAINTEXT_LISTENER=yes
+            - ALLOW_ANONYMOUS_LOGIN=yes
+            - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://192.168.10.103:9092
+        depends_on:
+            - zookeeper
+        healthcheck:
+            test: kafka-topics.sh --bootstrap-server 192.168.10.103:9092 -list || exit1
+            interval: 2s
+            timeout: 25s
+            retries: 15
+        networks:
+            asgard:
+                ipv4_address: 192.168.10.103
+    kafkaui:
+        image: consdata/kouncil:latest
+        restart: always
+        ports:
+            - 80:8080
+        environment:
+            - bootstrapServers=192.168.10.103:9092
+        depends_on:
+            kafka:
+                condition: service_healthy
+        networks:
+            asgard:
+    cloud2:
+        build: ./cloud2
+        restart: always
+        depends_on:
+            kafka:
+                condition: service_healthy
+        networks:
+            asgard:
+                ipv4_address: 192.168.10.104
+    analytics:
+        build: ./analytics_module
+        #restart: always
+        container_name: analytics
+        depends_on:
+            kafka:
+                condition: service_healthy
+        networks:
+            asgard:
+networks:
+    asgard:
+        ipam:
+            driver: default
+            config:
+                - subnet: "192.168.10.0/24"
+volumes:
+    prac: 
+    zookeeper_data:
+        driver: local
+    kafka_data:
+        driver: local

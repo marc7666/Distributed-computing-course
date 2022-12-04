@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  mosquitto:
+    image: eclipse-mosquitto:1.6.12
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - /Users/eloigabal/Desktop/iotProject/MQTTBroker/config:/mosquitto/config
+      - /Users/eloigabal/Desktop/iotProject/MQTTBroker/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - /Users/eloigabal/Desktop/iotProject/MQTTBroker/data:/mosquitto/data
+      - /Users/eloigabal/Desktop/iotProject/MQTTBroker/log:/mosquitto/log

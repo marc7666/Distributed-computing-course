@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  mongo-database:
+    image: mongo:4.2.23
+    volumes:
+      - /Users/eloigabal/Desktop/Distributed Computing/2223/iotProject/examples/mongo/docker-mongo/mongo_data:/data/db
+  express:
+    image: mongo-express:0.54.0
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo-database
+    depends_on:
+      - mongo-database
