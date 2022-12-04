@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  neo4j-database:
+    image: neo4j:4.4.12-community
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - /Users/eloigabal/Desktop/Distributed Computing/2223/iotProject/examples/neo4j/docker-neo4j/neo4j_data/data:/data
+      - /Users/eloigabal/Desktop/Distributed Computing/2223/iotProject/examples/neo4j/docker-neo4j/neo4j_data/logs:/logs
+      - /Users/eloigabal/Desktop/Distributed Computing/2223/iotProject/examples/neo4j/docker-neo4j/neo4j_data/import:/var/lib/neo4j/import
+      - /Users/eloigabal/Desktop/Distributed Computing/2223/iotProject/examples/neo4j/docker-neo4j/neo4j_data/plugins:/plugins
+    environment:
+      - NEO4J_AUTH=neo4j/test

@@ -1,0 +1,8 @@
+version: "3.9"
+services:
+  influxdb:
+    image: influxdb:2.4.0
+    ports:
+      - "8086:8086"
+    volumes:
+      - /Users/eloigabal/Desktop/Distributed Computing/2223/iotProject/examples/influxDB/influxdb_docker/influx-data:/var/lib/influxdb2

@@ -1,0 +1,42 @@
+[
+  {
+    	"name": "Eloi",
+    	"subject": ["Distributed Computing", "MongoDB"],
+    	"role": "professor"},
+    {
+    	"name": "Gerard",
+    	"subject": ["Math"],
+    	"role": "professor"},
+      {
+    	"name": "Jordi",
+    	"subject": ["Operative Sistems"],
+    	"role": "professor"},
+      {
+    	"name": "Joseph",
+    	"subject": ["Distributed Computing", "Math"],
+    	"role": "student"},
+      {
+    	"name": "Tifany",
+    	"subject": ["Distributed Computing", "MongoDB"],
+    	"role": "student"},
+      {
+    	"name": "Roger",
+    	"subject": ["Operative Systems"],
+    	"role": "student"},
+      {
+    	"name": "Ben",
+    	"subject": ["Operative Systems", "Math", "MongoDB"],
+    	"role": "student"},
+      {
+    	"name": "Caleb",
+    	"subject": ["Math"],
+    	"role": "student"},
+      {
+    	"name": "Tom",
+    	"subject": ["Math", "MongoDB"],
+    	"role": "student"},
+      {
+    	"name": "Melisa",
+    	"subject": ["Distributed Computing"],
+    	"role": "student"}
+]
