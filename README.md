@@ -16,3 +16,13 @@ Recent advances and new challenges of distributed computing applications.
 ### Activity 2
 
 Distributed computing applications. Case of study $\longrightarrow$ RabbitMQ
+
+## Projects
+
+### Project 1
+
+IoT application
+
+### Project 2
+
+Web service
