@@ -67,7 +67,7 @@ The first method, is \textit{process\_file}. This method, reads the file, that i
 This method has been designed thinking for efficiency, because reading directly from the file all the time is not very efficient.\\
 The second method is \textit{data\_every\_10\_seconds}. This method receives two parameters. The first one is the ID of the client, and the second one is the list that contains all the temperatures.\\
 This method, will send, every ten seconds, a lecture to the broker.\\
-This lecture will be published looking like: \textit{clientID-lecture} not without firs specifying in which topic has to be performed the \textit{publish} operation.
+This lecture will be published looking like: \textit{ClientID;lecture;datetime} not without firs specifying in which topic has to be performed the \textit{publish} operation.
 \subsubsection*{Dockerfile}
 \addcontentsline{toc}{subsubsection}{Dockerfile}
 As the project is implemented with Python, firstly the Python image has to he specified. This specification is done with the parameter \textit{FROM}. The second “bloc” consists in specifying the files that are going to be run. This is done with the parameter \textit{COPY}. Lastly, only remains running the file. This is done with the parameter \textit{CMD}. This is only the docker syntax for the command line execution command.\\
@@ -95,7 +95,7 @@ The third dependency is \textit{kafka}. This, is a Python client for the Apache 
 The last dependency is \textit{pickle}. This module implements binary protocols for serializing and deserializing a Python object structure.\\
 This Python file, has three methods. The first one is called \textit{connect\_to\_mongo}. This method establishes connection to a MongoDB database and gets the database and the collection. If the connection is not performed successfully, a message is sent reporting the error. One more point to comment is that the connection to the database is performed using a username and a password. This method does not receive any parameters.\\
 The second method of the file is \textit{save\_to\_db}. This method saves the data received from the MQTT broker to the database. If the insertion is not possible, a message is displayed reporting the error. The aforementioned data, from this method's point of view, is received as a parameter.\\
-The last method is \textit{on\_message}. This method receives the data from that arrives from the broker that looks like, \textit{ClientID-Lecture}, splits it up and does two tasks. For one site the data is saved to the MongoDB database and for the other site, the data is sent to the Kafka broker that subsequently is going to be sent to the analytics module, provided by the professor.\\
+The last method is \textit{on\_message}. This method receives the data from that arrives from the broker that looks like, \textit{ClientID;Lecture;datetime}, splits it up and does two tasks. For one site the data is saved to the MongoDB database and for the other site, the data is sent to the Kafka broker that subsequently is going to be sent to the analytics module, provided by the professor.\\
 In this point, it can exist a confusion, because two methods have been referred regarding saving the data. The following description will clear the possible confusion:
 \begin{itemize}
     \item \textit{save\_to\_db} $\longrightarrow$ Performs the insertion operation.
