@@ -2,7 +2,7 @@
 __author__ = mcr99
 __created__ = 13/11/2022
 """
-from datetime import date
+from datetime import datetime
 import paho.mqtt.client as mqtt
 import pymongo
 from kafka import KafkaProducer
@@ -35,7 +35,7 @@ def save_to_db(data):
     :return: None
     """
     try:
-        to_save = {"id_clien": data[0], "temperature": data[1]}
+        to_save = {"id_clien": data[0], "temperature": data[1], "datetime": data[2]}
         print(to_save)
         COLLECTION.insert_one(to_save)
         print("Data inserted successfully")
@@ -56,9 +56,10 @@ def on_message(client, userdata, message):
     of the method, because the library defines the method on_message in this way.
     """
     data_received = message.payload.decode()
-    data_to_store = data_received.split("-")
+    data_to_store = data_received.split(";")
     save_to_db(data_to_store)
-    producer.send('analytics', {"v": float(data_to_store[1]), "ts": date.today() , "sensor": data_to_store[0] })
+    date_time = datetime.strptime(data_to_store[2], '%Y-%m-%d %H:%M:%S.%f')
+    producer.send('analytics', {"v": float(data_to_store[1]), "ts": date_time , "sensor": data_to_store[0] })
     print(data_to_store)
 
 global producer

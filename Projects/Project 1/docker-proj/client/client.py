@@ -6,6 +6,7 @@ import random
 import paho.mqtt.client as mqtt
 import re
 from time import sleep
+from datetime import datetime
 
 
 # pylint: disable=W1514
@@ -43,9 +44,8 @@ def data_every_10_seconds(clientId, data):
         i += 1
         if i == len(data):
             i = 0
-        client.publish('marcc/temperature', clientId + "-" + data[i])
-        #client.publish('marcc/temperature', 16)
-        # print("16")
+        print(datetime.now())
+        client.publish('marcc/temperature', clientId + ";" + data[i] + ";" + str(datetime.now()))
         print(data[i])
         i = (i + 1) % len(data)
         sleep(10)
