@@ -4,18 +4,16 @@ import json
 # from bson.json_util import dumps
 from jsonschema import validate
 from flask_swagger_ui import get_swaggerui_blueprint
-from flask_cors import CORS
 import socket
 from mysql.connector import Error
 import mysql.connector
 from mysql.connector import errorcode
 import pymongo
+from bson.json_util import dumps
 
 global DB
-global COLLECTION
 
 app = Flask(__name__)
-CORS(app)
 
 home_schema = {
     "type": "object",
@@ -432,17 +430,17 @@ def list_all_data():
 def get_sensor_temp(sensorID):
     try:
         client = pymongo.MongoClient(
-            "mongodb://marc:2022@192.168.10.102:27017/")
+            "mongodb://marc:2022@192.168.0.24:27017/")
         db = client["temperatures"]
         COLLECTION = db["temperatures"]
         print("Connected successfully to the MongoDB")
-        result = COLLECTION.find({"sensorID": sensorID})
-        return jsonify(result), 200
+        
+        return Response(dumps(result), status=200, mimetype='application/json')
     except:
         print("Unable to connect with the specified DB")
     # get temperatures from sensor in mongoDB
     try:
-        """result = COLLECTION.find({"sensorID": sensorID})"""
+        result = COLLECTION.find({"_id": sensorID})
         client.close()
         if not result:
             return jsonify({"message": "Sensor not found"}), 404

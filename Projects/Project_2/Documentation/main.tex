@@ -171,7 +171,39 @@ If all the queries, that have to be executed, finis successfully, a 200 code is 
 \addcontentsline{toc}{subsection}{Endpoint /sensor/ 
 \textless sensorID \textgreater}
 This endpoint, only has a GET method.\\
-This endpoint will connect to the MongoDB of the first project and will get the temperatures of the specified sensor.
+This endpoint will connect to the MongoDB of the first project and will get the temperatures of the specified sensor.\\
+Unfortunately, this method does not work, because I had to make changes in the first project before deliberating It and I haven't had enough time to implement this functionality.
+\newpage
+\subsection*{Representations}
+\addcontentsline{toc}{subsection}{Representations}
+To create the representations as in the movie database, the choosen tool has been Swagger. In order to be able to check the Swagger, you must:
+\begin{enumerate}
+    \item Build and run the project.
+    \item In the browser, enter the following URL:
+    \begin{enumerate}
+        \item \href{http://172.17.0.1:5000/api/docs/}{\underline{http://172.17.0.1:5000/api/docs/}}
+    \end{enumerate}
+\end{enumerate}
+Even though the Swagger URL and the steps to watch the Swagger are provided. Let's take a look at some images of how It looks, the Swagger.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.5]{images/Swagger default.png}
+    \caption{Swagger's default view}
+    \label{fig:my_label}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.5]{images/Swagger deffault amb menu desplegat.png}
+    \caption{Swagger's default view with a method specification displayed}
+    \label{fig:my_label}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.5]{images/Swagger schemas.png}
+    \caption{Swagger's schemas}
+    \label{fig:my_label}
+\end{figure}
+If you want to see the Swagger in local, just enter in \textit{apirest/static/swagger.json}
 \newpage
 \section*{Some project justifications}
 \addcontentsline{toc}{section}{Some project justifications}
@@ -206,7 +238,6 @@ Swagger provides immense support for a wide range of platforms, languages, and d
 \addcontentsline{toc}{section}{Execution cases}
 In order to demonstrate the correct functioning of the API, I'm going to use the \textit{Stoplight Studio} application, and I'm going to follow the steps of the \textit{WS demo} section of the statement.\\
 Before starting with the demos, it must be said that the IDs will not start in “normal” indexes because of previous tests.
-\newpage
 \subsection*{WS demo's first step}
 \addcontentsline{toc}{subsection}{WS demo's first step}
 This first step requires creating three different houses, with the two first ones with a similar description.
@@ -249,7 +280,6 @@ This step requires searching a home by its description.
     \label{fig:full}
 \end{figure}
 As it can be seen, the operation finishes successfully, due to a 200 code is raised.
-\newpage
 \subsection*{WS demo's fourth step}
 \addcontentsline{toc}{subsection}{WS demo's fourth step}
 This fourth step requires deleting the second home.
@@ -369,7 +399,7 @@ Due to there're two users as the result of the partial search, only the user \te
 As it can be seen, the operation finishes successfully due to a 200 code is raised.
 \subsection*{WS demo's thirteenth step}
 \addcontentsline{toc}{subsection}{WS demo's thirteenth step}
-
+Unfortunately, this method does not work, because I had to make changes in the first project before deliberating It and I haven't had enough time to implement this functionality.
 \subsection*{WS demo's fourteenth step}
 \addcontentsline{toc}{subsection}{WS demo's fourteenth step}
 In this penultimate part, an ID of an existing user must be checked.
