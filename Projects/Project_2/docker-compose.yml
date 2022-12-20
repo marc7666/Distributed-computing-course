@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysqldb
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=pr2
+      - MYSQL_USER=marc
+      - MYSQL_PASSWORD=2022
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 1s
+      retries: 120
+    volumes:
+      - mysql_data:/var/lib/mysql
+      #- "./scripts/initdb.sql:/docker-entrypoint-initdb.d/initdb.sql"
+      - ./scripts:/docker-entrypoint-initdb.d
+    networks:
+      asgard2:
+        aliases:
+          - mysqldb
+        ipv4_address: 192.168.20.2
+  apirest:
+    build: ./apirest
+    container_name: APIREST
+    ports:
+      - 5000:5000
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      asgard2:
+networks:
+    asgard2:
+        ipam:
+            driver: default
+            config:
+                - subnet: "192.168.20.0/24"
+volumes:
+  mysql_data:
