@@ -1,0 +1,509 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "60wyiag86cg8x"
+  },
+  "info": {
+    "title": "practica2",
+    "version": "1.0",
+    "contact": {
+      "name": "Marc",
+      "email": "mcr34@alumnes.udl.cat"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://172.17.0.1:5000"
+    }
+  ],
+  "paths": {
+    "/home": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Unable to get data"
+          }
+        },
+        "operationId": "get-home",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "description"
+          }
+        ]
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-home",
+        "responses": {
+          "201": {
+            "description": "Home created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Error creating home"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Home"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "",
+        "operationId": "put-home",
+        "responses": {
+          "200": {
+            "description": "Home updated"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "406": {
+            "description": "Nothing to update"
+          },
+          "500": {
+            "description": "Error updating home"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Home_update"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Home_update"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-home",
+        "responses": {
+          "200": {
+            "description": "Home deleted"
+          },
+          "500": {
+            "description": "Error deleting home"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Home_update"
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "name": "string",
+                    "address": "string",
+                    "description": "string",
+                    "home_ownerid": 0,
+                    "homeid": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": []
+    },
+    "/home/prts/{criteria}/{value}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "criteria",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "value",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Unable to get data"
+          }
+        },
+        "operationId": "get-home-prts-criteria-value"
+      }
+    },
+    "/sensor": {
+      "post": {
+        "summary": "",
+        "operationId": "post-sensor",
+        "responses": {
+          "201": {
+            "description": "Sensor created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Error creating sensor"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Sensor"
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "sensorID": "string",
+                    "room": "string",
+                    "homeid": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-sensor",
+        "responses": {
+          "200": {
+            "description": "Sensor deleted"
+          },
+          "500": {
+            "description": "Error deleting sensor"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Sensor"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/home/{homeid}/sensor": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "homeid",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Unable to get data"
+          }
+        },
+        "operationId": "get-home-homeid-sensor"
+      }
+    },
+    "/homeowner": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Error getting homeowner"
+          }
+        },
+        "operationId": "get-homeowner",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Home_Owner"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-homeowner",
+        "responses": {
+          "201": {
+            "description": "Home owner created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Error creating home owner"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Home_Owner"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/homeowner/check/{home_ownerid}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "home_ownerid",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "Home owner found"
+          },
+          "404": {
+            "description": "Home owner not found"
+          },
+          "500": {
+            "description": "Unable to get data"
+          }
+        },
+        "operationId": "get-homeowner-check-home_ownerid"
+      }
+    },
+    "/homeowner/{home_ownerID}/homes": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "home_ownerID",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Unable to get data"
+          }
+        },
+        "operationId": "get-homeowner-home_ownerID-homes"
+      }
+    },
+    "/alldata": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Unable to get data"
+          }
+        },
+        "operationId": "get-alldata"
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-alldata",
+        "responses": {
+          "200": {
+            "description": "Added successfully"
+          },
+          "400": {
+            "description": "Invalid data"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Sensor": {
+        "title": "Sensor",
+        "x-stoplight": {
+          "id": "g95s012gj4rmt"
+        },
+        "type": "object",
+        "properties": {
+          "sensorID": {
+            "type": "string"
+          },
+          "room": {
+            "type": "string"
+          },
+          "homeid": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "sensorID",
+          "room",
+          "homeid"
+        ]
+      },
+      "Home_Owner": {
+        "title": "Home_Owner",
+        "x-stoplight": {
+          "id": "ji2ve5g2oewfp"
+        },
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "password"
+        ]
+      },
+      "Home": {
+        "title": "Home",
+        "x-stoplight": {
+          "id": "tk29f2mu232vo"
+        },
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "home_ownerid": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "name",
+          "address",
+          "description"
+        ],
+        "x-examples": {
+          "Example 1": {
+            "name": "House1",
+            "address": "Lleida",
+            "description": "Marc flat",
+            "home_ownerid": 1
+          },
+          "Example 2": {
+            "name": "House2",
+            "address": "Barcelona",
+            "description": "Marc apartment",
+            "home_ownerid": 1
+          },
+          "Example 3": {
+            "name": "House3",
+            "address": "Tarragona",
+            "description": "Sergi house",
+            "home_ownerid": 2
+          }
+        }
+      },
+      "Home_update": {
+        "title": "Home_update",
+        "x-stoplight": {
+          "id": "ucrk3knk5s4a8"
+        },
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "home_ownerid": {
+            "type": "integer"
+          },
+          "homeid": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "home_ownerid",
+          "homeid"
+        ],
+        "x-examples": {
+          "Example 1": {
+            "name": "string",
+            "address": "string",
+            "description": "string",
+            "home_ownerid": 0,
+            "homeid": 0
+          }
+        }
+      }
+    }
+  }
+}
